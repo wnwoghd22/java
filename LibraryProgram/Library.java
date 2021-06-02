@@ -7,7 +7,7 @@ import Library.fileManager.*;
 public class Library {
 	private static AccountHandler aH;
 	private static BookHandler bH;
-	private static writeFile() { aH.write(); bH.write(); }
+	private static void writeFile() { aH.write(); bH.write(); }
 
 	private static Scanner sc;
 
@@ -29,11 +29,10 @@ public class Library {
 				case 2 : aH.CreateAccount(); break;
 			}
 			
-		}
-
-		if(aH.loggedIn()) do {
+			if(aH.loggedIn()) do {
 			
-		}	
+			} while (UserLoop());
+		}
 	}
 
 	private static void login() {
@@ -44,18 +43,21 @@ public class Library {
 		pw = sc.next();
 		aH.Login(id, pw);
 	}
-	private boolean UserLoop() {
+	private static boolean UserLoop() {
 		boolean result = false;
 		int choice = 0;
 		do {
+			sc.nextInt();
+		} while(choice >= 0 && choice <= 7);
 
-		} while(choice >= 0 && choice <= 
-		 sc.nextInt();
 		switch(choice) {
 		case 1 : // show info
 			aH.ShowInfo();
 			break;
+		case 0 : // exit loop
+			return false;
 		}
+		return true;
 	}
 	private static void Test() {
 		System.out.println("execute");

@@ -20,7 +20,7 @@ public class Journal extends Book {
 	}
 	@Override
 	public boolean Lend(){
-		if(currentNum<=MaxNum){
+		if(currentNum<=maxNum){
 			currentNum++;
 			return true;
 		}

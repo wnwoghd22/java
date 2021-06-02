@@ -17,7 +17,7 @@ public class General extends Book {
 	}
 	@Override
 	public boolean Lend(){
-		if(currentNum+1<=MaxNum){
+		if(currentNum+1<=maxNum){
 			currentNum++;
 			return true;
 		}

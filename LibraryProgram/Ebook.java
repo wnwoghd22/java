@@ -18,7 +18,7 @@ public class Ebook extends Book {
 	@Override
 	public boolean Lend(){
 		currentNum++;
-		reuturn true;
+		return true;
 	}
 	@Override
 	public void ReturnBook(){
