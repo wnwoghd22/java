@@ -1,0 +1,24 @@
+Implement a Java Program to get the following inputs and show the result calculated.
+- Base (2~16)
+- 2 operands
+- 1 operator (+ or -)
+
+You must implement a method to calculate the given arithmatic expression and a method for base conversion; Don't use any method in Java standard library.
+You must check whether the inputs are valid or not.
+
+진법(2~16진법), 두개의 피연산자, 연산자를 입력받아 이를 계산해서 결과(주어진 진법과 10진법 둘다 보여줌)를 출력하는 Java 프로그램을 작성하시오.
+산술식을 계산하는 method와 진법변환을 하는 method는 직접 작성하고 자바의 표준 라이브러리의 클래스나 매소드를 활용하지 말 것.
+입력에서의 오류는 체크해야 함. 
+
+Execution Example)
+Base : 7
+2 operands : 23 44 
+1 operator (+ or -) : +
+
+23 + 24 = 100 (Base 7) = 49 (Base 10)  
+
+Radix : 3
+2 operands : 21 44 
+1 operator (+ or -) : +
+
+Error : 44 is not allowed in Base 3.

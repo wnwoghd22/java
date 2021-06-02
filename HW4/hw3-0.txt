@@ -1,0 +1,13 @@
+Write a Java program that takes two numbers as input and
+display the product of two numbers, the difference(absolute value) between two numbers, and the quotient and the remainder of the division (big number/small number) of two numbers. 
+
+Upload only the java source code file such as XXX.java.
+
+Execution Example)
+Input 1 : 23
+Input 2 : 12
+
+Product : 23 * 12 = 276
+Difference : 23 - 12 = 11
+Quotient : 23 / 12 = 1 
+Remainder : 23 % 12 = 11

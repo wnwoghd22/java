@@ -1,0 +1,59 @@
+Implement Java classes to satifying the following requirements
+
+- GObject.java
+  color                          // public String
+  date                           // public java.util.Date
+  GObject()                     // public constructor, set color as "White", create date object with current time
+  cStatePrint()                  // public void, print the color and date information
+
+- Circle.java                    // inherit GObject
+  radius		          // private double
+  Circle(double radius, String color)             // public constructor, set radius and color with parameters
+  calcArea()                    // private double
+  calcPerimeter()              // private double
+  cStatePrint()                  // public void, print the color and date information, area, and perimeter
+ 
+- EqTriangle.java              // inherit GObject
+  width                         // private double
+  EqTriangle(double width, String color)      // public constructor, set width and color with parameters
+  calcArea()                    // private double                     // https://blog.naver.com/ikid4127/222267297431
+  calcPerimeter()              // private double
+  cStatePrint()                 // public void, print the color and date information, area, and perimeter
+
+- Rectangle.java
+  width, heigth                // private double
+  Rectangle(double width, double height, String color)      // public constructor, set width, height, and color with parameters
+  calcArea()                    // private double
+  calcPerimeter()              // private double
+  cStatePrint()                  // public void, print the color and date information, area, and perimeter
+
+- ShowGObject.java (main method)
+  Get an input about shape
+  Get the information (such as width, height) to calculate the area and perimeter.
+  Create an object according to shape
+  print the information about the shape by calling cStatePrint() and super.cStatePrint()
+
+
+Execution Example>
+
+Shape ? 1. Equilateral Triangle / 2. Rectangle / 3. Circle / 4. Quit : 1
+Width : 5
+Color : Red
+One equilateral triangle is created on Sat May 08 11:41:57 KST 2021, whose color is Red. 
+Its area is 10.8, its perimeter is 15.0
+
+Shape ? 1. Equilateral Triangle / 2. Rectangle / 3. Circle / 4. Quit : 2
+Width : 5
+Height : 2
+Color : Blue
+One rectangle is created on Sat May 08 11:45:57 KST 2021, whose color is Blue.
+Its area is 10.0, its perimeter is 20.0
+
+Shape ? 1. Equilateral Triangle / 2. Rectangle / 3. Circle / 4. Quit : 3
+Radius : 3.1
+Color : Brown
+One circle is created on Sat May 08 11:49:57 KST 2021, whose color is Brown.
+Its area is 30.2, its perimeter is 19.5
+
+Shape ? 1. Equilateral Triangle / 2. Rectangle / 3. Circle / 4. Quit : 4
+ 
