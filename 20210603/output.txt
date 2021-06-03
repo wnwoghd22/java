@@ -1,0 +1,6 @@
+Sum = 15
+Average = 3.0
+Maximum = 1
+Minimum = 5
+Sorted
+5 4 3 2 1 
