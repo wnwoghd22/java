@@ -6,9 +6,9 @@ public abstract class Book {
 	protected int maxNum;
 	protected int currentNum;
 
-	public Book(String b_id, String name, int maxNum, int currentNum) {
+	public Book(String b_id, String name, int maxNum) {
 		this.b_id = b_id; this.name = name;
-		this.maxNum = maxNum; this.currentNum = currentNum;
+		this.maxNum = maxNum; this.currentNum = 0;
 	}
 	
 	public abstract void ShowInfo();
@@ -17,4 +17,6 @@ public abstract class Book {
 
 	public String getB_id() { return b_id; }
 	public String getName() { return name; }
+	public int getMaxNum() { return maxNum; }
+	public int getCurrentNum() { return currentNum; }
 }

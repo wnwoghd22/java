@@ -1,0 +1,5 @@
+Library.Book.Journal,art1,jo444,class Library.Book.Journal,0,1,jonN444
+Library.Book.Journal,art1,art2,001,class Library.Book.Journal,0,1,joN
+Library.Book.Ebook,e001.1,class Library.Book.Ebook,0,sample des,0,ebN
+Library.Book.General,genId,class Library.Book.General,0,sample des,3,genN
+Library.Book.General,genID1,class Library.Book.General,0,123,1,genN

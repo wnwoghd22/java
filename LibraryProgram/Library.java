@@ -13,8 +13,9 @@ public class Library {
 
 	public static void main(String args[]) {
 		
+		TestIO();
 		//Test();
-
+		/*
 		sc = new Scanner(System.in);
 		int input = 0;
 
@@ -22,7 +23,7 @@ public class Library {
 		bH = new BookHandler();
 
 		while(true) {
-			System.out.println("menu");
+			System.out.println("menu 1 : log in, 2 : create account, 0 : exit > ");
 			input = sc.nextInt();
 			switch(input) {
 				case 1 : login(); break;
@@ -33,6 +34,7 @@ public class Library {
 			
 			} while (UserLoop());
 		}
+		*/
 	}
 
 	private static void login() {
@@ -59,6 +61,7 @@ public class Library {
 		}
 		return true;
 	}
+	
 	private static void Test() {
 		System.out.println("execute");
 		List<A> list = new ArrayList<A>();
@@ -85,4 +88,19 @@ public class Library {
 		for(int i = 0; i < 2; ++i)
 			System.out.println("name : " + list.get(i).getName() + ", num : " + list.get(i).getNum());
 	}
+	private static void TestIO() {
+
+		aH = new AccountHandler();
+		bH = new BookHandler();
+
+		aH.getList();
+		bH.getList();
+
+		aH.CreateAccount();
+
+		bH.AddBook();
+
+		writeFile();
+	}
+
 }

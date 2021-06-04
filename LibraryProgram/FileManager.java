@@ -4,6 +4,7 @@ import java.util.*;
 import java.io.*;
 import java.nio.file.*;
 import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
 
 public abstract class FileManager<T> {
 	private final String path;
@@ -25,9 +26,21 @@ public abstract class FileManager<T> {
 		Class c = _data.getClass();
 		String result = c.getName();
 
-		Method[] methods = c.getDeclaredMethods();
-		for(Method m : methods) if(isGetter(m)) {
+		Method[] methods = c.getMethods();
+		List<Method> getters = new ArrayList<Method>();
+		for(Method m : methods) if(isGetter(m)) getters.add(m);
+		
+		Collections.sort(getters, new Comparator<Method>() {
+			@Override
+			public int compare(Method m1, Method m2) {
+				return m1.getName().compareTo(m2.getName());
+			}
+		});
+		for(Method m : getters) {
 			try { result += "," + m.invoke(_data); }
+			catch (InvocationTargetException e) { 
+				e.getTargetException().printStackTrace(); //getTargetException
+			}
 			catch(Exception e) {
 				System.out.println(m.getName() + e);
 				continue;
@@ -44,7 +57,8 @@ public abstract class FileManager<T> {
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String data = null;
 			while( (data = reader.readLine()) != null ) {
-				list.add(Convert(data));
+				T temp = Convert(data);
+				if(temp != null) list.add(temp);
 			}
 		}	
 		return list;	

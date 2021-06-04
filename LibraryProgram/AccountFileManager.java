@@ -14,6 +14,10 @@ public class AccountFileManager extends FileManager<Account> {
 		Account result = null;
 		String[] list = _data.split(",");
 
+		if(list[0].equals("Library.Account.Normal")) result = new Normal(list);
+		if(list[0].equals("Library.Account.Student")) result = new Student(list);
+		if(list[0].equals("Library.Account.Professor")) result = new Professor(list);
+		if(list[0].equals("Library.Account.Librarian")) result = new Librarian(list);
 				
 		return result;
 	}

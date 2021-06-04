@@ -11,10 +11,12 @@ public class AccountHandler {
 	private Borrower borrower;
 	private List<Account> accountList;
 	private AccountFileManager fm;
+
 	public AccountHandler() {
 		borrower = null;
 		sc = new Scanner(System.in);
 		fm = new AccountFileManager("./Library/account_data.txt");
+		accountList = new ArrayList<Account>();
 	}
 	
 	/* methods */
@@ -22,8 +24,22 @@ public class AccountHandler {
 		try { fm.WriteFile(accountList); }
 		catch(IOException e) { System.out.println(e); }
 	}
-	public void Login(String id, String pw) {
+	public void getList() {
+		try { accountList = fm.ReadFile(); }
+		catch(IOException e) { System.out.println(e); }
+	}
 
+	public void Login(String id, String pw) {
+		for(int i = 0; i < accountList.size(); ++i) {
+			if(accountList.get(i).getId().equals(id)) {
+				if(checkIfValidPw(pw) && accountList.get(i).getPw().equals(pw)) {
+					System.out.println("Log in Complete!");
+					borrower = accountList.get(i);
+				}
+				return;
+			}
+		}
+		System.out.println("No such account!");
 	}
 	public void CreateAccount() {
 		String id, pw; int choice = 0;
@@ -31,16 +47,38 @@ public class AccountHandler {
 		System.out.print("Account Type? 1 : General, 2 : Student, 3 : Professor, 4 : Librarian > ");
 		choice = sc.nextInt();
 
-		System.out.print("ID? : "); id = sc.next();
-		do {
-			System.out.print("Password? : ");
-			pw = sc.next();
-		} while(!checkIfValidPw(pw));
+		do { System.out.print("ID? : "); id = sc.next(); } while(checkIfIdExist(id));
+		do { System.out.print("Password? : "); pw = sc.next(); } while(!checkIfValidPw(pw));
 
 		switch(choice) {
 		case 1 : //Normal
+			accountList.add(new Normal(id, pw));
+			break;
+		case 2 : //Student
+			String s_id, major;
+			System.out.print("Student ID? : "); s_id = sc.next();
+			System.out.print("Major? : "); major = sc.next();
+			accountList.add(new Student(id, pw, s_id, major));
+			break;
+		case 3 : //Professor
+			String p_id;
+			System.out.print("Employee ID? : "); p_id = sc.next();
+			accountList.add(new Professor(id, pw, p_id));
+			break;
+		case 4 : //Librarian
+			String l_id;
+			System.out.print("Employee ID? : "); l_id = sc.next();
+			accountList.add(new Librarian(id, pw, l_id));
 			break;
 		}
+	}
+	private boolean checkIfIdExist(String id) {
+		for(int i = 0; i < accountList.size(); ++i)
+			if(accountList.get(i).getId().equals(id)) {
+				System.out.println("ID already exist!");
+				return true;
+			}
+		return false;
 	}
 	private boolean checkIfValidPw(String pw) {
 		if(pw.length() < 8) {
@@ -64,5 +102,6 @@ public class AccountHandler {
 		return true;
 	}
 	public boolean loggedIn() { return borrower != null; }
+	public void ShowInfo() { borrower.ShowInfo(); }
 
 }
