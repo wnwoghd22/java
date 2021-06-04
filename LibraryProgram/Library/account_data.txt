@@ -1,8 +1,4 @@
-Library.Account.Normal,,class Library.Account.Normal,class Library.Account.Normal,class Library.Account.Normal
-Library.Account.Student,,class Library.Account.Student,major2,class Library.Account.Student,class Library.Account.Student,
-Library.Account.Professor,,class Library.Account.Professor,,class Library.Account.Professor,
-Library.Account.Librarian,,class Library.Account.Librarian,,class Library.Account.Librarian,
-Library.Account.Normal,,class Library.Account.Normal,class Library.Account.Normal,class Library.Account.Normal
-Library.Account.Normal,,class Library.Account.Normal,class Library.Account.Normal,class Library.Account.Normal
-Library.Account.Normal,,class Library.Account.Normal,class Library.Account.Normal,gen123
-Library.Account.Librarian,,class Library.Account.Librarian,libE123,lib,libPw123
+Library.Account.Normal,,class Library.Account.Normal,genId,genPw123
+Library.Account.Normal,001,joN,2,2021,5,5,2021,5,8,e001.1,ebN,2,2021,5,5,2021,5,8,genID1,genN,2,2021,5,5,2021,5,12,class Library.Account.Normal,gen,genPw123
+Library.Account.Student,,class Library.Account.Student,stu1,major1,stuPw123,s_id123
+Library.Account.Professor,,class Library.Account.Professor,asdf,pro123,pfopfo123

@@ -26,6 +26,7 @@ public abstract class Account implements Borrower {
 		}
 		if(bookList.size() < borrowLimit) {
 			bookList.add(new BorrowedBook(b_id, name, duration));
+			System.out.println("You have borrowed " + b_id + " " + name);
 			return true;	
 		}
 		else {
@@ -78,6 +79,15 @@ class BorrowedBook {
     		from = Calendar.getInstance();
     		to = Calendar.getInstance(); to.add(Calendar.DATE, d);
 	}
+	/* for csv converting */
+	BorrowedBook(String[] args) {
+		b_id = args[0]; name = args[1]; extensionLimit = Integer.parseInt(args[2]);
+
+		from = Calendar.getInstance(); to = Calendar.getInstance();
+
+		from.set(Calendar.YEAR, Integer.parseInt(args[3])); from.set(Calendar.MONTH, Integer.parseInt(args[4])); from.set(Calendar.DATE, Integer.parseInt(args[5]));
+		to.set(Calendar.YEAR, Integer.parseInt(args[6])); to.set(Calendar.MONTH, Integer.parseInt(args[7])); to.set(Calendar.DATE, Integer.parseInt(args[8]));
+	}
     
 	void Extend() {
 		if(extensionLimit>0) {
@@ -87,8 +97,8 @@ class BorrowedBook {
 }
 	void printState() {
 		System.out.println("Book Id : "+b_id);
-		System.out.println("lended from : "+from);
-		System.out.println("Due of return : "+to);
+		System.out.println("lended from "+ from.get(Calendar.YEAR) + "-" + from.get(Calendar.MONTH) + "-" + from.get(Calendar.DATE) );
+		System.out.println("Due of return : "+ to.get(Calendar.YEAR) + "-" + to.get(Calendar.MONTH) + "-" + to.get(Calendar.DATE) );
 		System.out.println("Left Extension : " +extensionLimit);
 	}
 	String getString() {

@@ -24,11 +24,14 @@ public class General extends Book {
 	}
 	@Override
 	public boolean Lend(){
-		if(currentNum+1<=maxNum){
+		if (currentNum < maxNum) {
 			currentNum++;
 			return true;
 		}
-		else return false;	
+		else {
+			System.out.println("No more Books!");
+			return false;
+		}	
 	}
 	@Override
 	public void ReturnBook(){

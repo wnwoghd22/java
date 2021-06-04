@@ -4,6 +4,7 @@ import java.util.*;
 import java.io.*;
 
 import Library.Account.*;
+import Library.Book.*;
 import Library.fileManager.AccountFileManager;
 
 public class AccountHandler {
@@ -104,4 +105,7 @@ public class AccountHandler {
 	public boolean loggedIn() { return borrower != null; }
 	public void ShowInfo() { borrower.ShowInfo(); }
 
+	public void Borrow(Book b) {
+		if(b != null) borrower.Borrow(b.getB_id(), b.getName());
+	}
 }

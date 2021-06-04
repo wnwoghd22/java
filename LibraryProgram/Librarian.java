@@ -1,4 +1,6 @@
 package Library.Account;
+import java.util.*;
+
 
 public class Librarian extends Account {
 	private String employeeId;
@@ -8,16 +10,21 @@ public class Librarian extends Account {
 		employeeId = "00000000";
 	}
 	public Librarian(String id, String pw, String e_id) {
-		super(id, pw, 5, 7);
+		super(id, pw, 7, 5);
 		employeeId = e_id;
 	}
 	/* for csv file converting */
 	public Librarian(String[] args) {
-		super(args[2], args[3], 5, 7);
+		/* args order : class, [bookList], class, e_id, id, pw */
+		super(args[2], args[3], 7, 5);
 		employeeId = args[1];
-		/**
-		 * bookList?
-		 */
+		
+		if(args.length == 5) return;
+		String[] bListArgs = Arrays.copyOfRange(args, 1, args.length - 4);
+		for(int i = 0; i < bListArgs.length; i += 9) {
+			String[] sub = Arrays.copyOfRange(bListArgs, i, i + 9);
+			bookList.add(new BorrowedBook(sub));
+		}
 	}
 
 	@Override
@@ -44,8 +51,4 @@ public class Librarian extends Account {
             }
         }
     }*/
-    
-    
-    
-    
 }

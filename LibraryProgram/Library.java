@@ -13,28 +13,28 @@ public class Library {
 
 	public static void main(String args[]) {
 		
-		TestIO();
-		//Test();
-		/*
 		sc = new Scanner(System.in);
-		int input = 0;
+		int input = 0; boolean flag = false;
 
 		aH = new AccountHandler();
 		bH = new BookHandler();
 
+		aH.getList();
+		bH.getList();
+
 		while(true) {
-			System.out.println("menu 1 : log in, 2 : create account, 0 : exit > ");
+			System.out.print("menu 1 : log in, 2 : create account, 0 : exit > ");
 			input = sc.nextInt();
 			switch(input) {
 				case 1 : login(); break;
 				case 2 : aH.CreateAccount(); break;
+				case 0 : flag = true;
 			}
+			if(flag) break;
 			
-			if(aH.loggedIn()) do {
-			
-			} while (UserLoop());
+			if(aH.loggedIn()) do; while (UserLoop());
 		}
-		*/
+		writeFile();
 	}
 
 	private static void login() {
@@ -47,47 +47,55 @@ public class Library {
 	}
 	private static boolean UserLoop() {
 		boolean result = false;
+		System.out.print("choice ? : show info (1), book list (2), exit (0) >");
+
 		int choice = 0;
 		do {
-			sc.nextInt();
-		} while(choice >= 0 && choice <= 7);
+			choice = sc.nextInt();
+		} while(choice < 0 || choice > 7);
 
 		switch(choice) {
 		case 1 : // show info
 			aH.ShowInfo();
+			break;
+		case 2 : //ShowList
+			ShowBookList();
 			break;
 		case 0 : // exit loop
 			return false;
 		}
 		return true;
 	}
-	
-	private static void Test() {
-		System.out.println("execute");
-		List<A> list = new ArrayList<A>();
-		list.add(new A("a", 1));
-		list.add(new A("b", 2));
+	private static void ShowBookList() {
+		List<String> list = bH.ShowList(0);
+		
+		int choice = 0;
+		do  {
+			System.out.print("View book Detail (1 ~ " + list.size() +
+			"), Next 10 books (11), Previous 10 books (12), return to menu (0) >");
+			choice = sc.nextInt();
 
-		for(int i = 0; i < 2; ++i) System.out.println(list.get(i));
-
-		testFM fm = new testFM("./Library/test.txt");
-		try{
-			fm.WriteFile(list);
-		}
-		catch(IOException e) {
-			System.out.println(e);
-		}
-
-		List<A> list2 = null;
-		try{
-			list2 = fm.ReadFile();
-		}
-		catch(IOException e) {
-			System.out.println(e);
-		}
-		for(int i = 0; i < 2; ++i)
-			System.out.println("name : " + list.get(i).getName() + ", num : " + list.get(i).getNum());
+			if(choice == 11) { list = bH.ShowList(false); continue; }
+			if(choice == 12) { list = bH.ShowList(true); continue; }
+			if(choice == 0) break;
+			
+			if(choice >= 1 && choice <= list.size()) {
+				String b_id = bH.getBook(list.get(choice - 1)).getB_id();
+				bH.ShowInfo();
+				do {
+					System.out.print("Borrow (1), Back to List (2), return to menu (0) : ");
+					choice = sc.nextInt();
+				} while ( choice < 0 || choice > 2);
+				if(choice == 2) { list = bH.ShowList(); continue; }
+				if(choice == 0) continue;
+				if(choice == 1) { //borrow
+					aH.Borrow(bH.Lend(b_id));
+					break;
+				}
+			}
+		} while(true);
 	}
+	
 	private static void TestIO() {
 
 		aH = new AccountHandler();
@@ -102,5 +110,4 @@ public class Library {
 
 		writeFile();
 	}
-
 }
