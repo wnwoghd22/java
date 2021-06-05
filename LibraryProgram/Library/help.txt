@@ -1,0 +1,8 @@
+Library Program : Java 001 class Project
+
+ <args>	: <description>
+ -al	: print all accounts and start the program
+ -bl	: print all books and start the program
+ -admin	: start as administrator mode. You can only login with Librarian account and
+	  can add or delete book.
+ -debug	: (only for developers) print all details while runtime 

@@ -29,12 +29,16 @@ public class BookHandler {
 	}
 	
 	/* methods */
-	public void write() { 
-		try { fm.WriteFile(bookList); }
+	public void write(boolean debug) { 
+		try { fm.WriteFile(bookList, debug); }
 		catch(IOException e) { System.out.println(e); }
 	}
-	public void getList() {
-		try { bookList = fm.ReadFile(); }
+	public void getList(boolean print) {
+		try { 
+			bookList = fm.ReadFile();
+			if(print) for(Book b : bookList)
+				System.out.println(b.getClass() + "	" + b.getB_id() + "	" + b.getName());
+		}
 		catch(IOException e) { System.out.println(e); }
 	}
 

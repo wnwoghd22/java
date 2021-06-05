@@ -7,20 +7,46 @@ import Library.fileManager.*;
 public class Library {
 	private static AccountHandler aH;
 	private static BookHandler bH;
-	private static void writeFile() { aH.write(); bH.write(); }
+	private static void writeFile() { aH.write(debug); bH.write(debug); }
 
 	private static Scanner sc;
 
+	private static boolean debug;
+
 	public static void main(String args[]) {
-		
-		sc = new Scanner(System.in);
-		int input = 0; boolean flag = false;
+
+		if(args.length == 1 && args[0].equals("help")) {
+			Help(); return;
+		}
+
+		boolean printAlist = false, printBlist = false, adminMode = false;
+		debug = false;
+
+		for(String s : args) {
+			if(s.equals("-al")) { printAlist = true; continue; }
+			if(s.equals("-bl")) { printBlist = true; continue; }
+			if(s.equals("-admin")) { adminMode = true; continue; }
+			if(s.equals("-debug")) { 
+				debug = true; printAlist = true; printBlist = true;
+				continue;
+			}
+		}
 
 		aH = new AccountHandler();
 		bH = new BookHandler();
 
-		aH.getList();
-		bH.getList();
+		aH.getList(printAlist);
+		bH.getList(printBlist);
+
+		sc = new Scanner(System.in);
+
+		if(!adminMode) MainLoop();
+		else AdminLoop();
+		
+		writeFile();
+	}
+	private static void MainLoop() {
+		int input = 0; boolean flag = false;
 
 		while(true) {
 			System.out.print("menu 1 : log in, 2 : create account, 0 : exit > ");
@@ -34,7 +60,9 @@ public class Library {
 			
 			if(aH.loggedIn()) do; while (UserLoop());
 		}
-		writeFile();
+	}
+	private static void AdminLoop() {
+		return;
 	}
 
 	private static void login() {
@@ -60,6 +88,8 @@ public class Library {
 			break;
 		case 2 : //ShowList
 			ShowBookList();
+			break;
+		case 4 : //return book
 			break;
 		case 0 : // exit loop
 			return false;
@@ -95,14 +125,25 @@ public class Library {
 			}
 		} while(true);
 	}
-	
+	private static void ReturnBook() {
+
+	}
+	private static void Help() {
+		try {
+			sc = new Scanner(new File("./Library/help.txt"));
+			while(sc.hasNextLine()) System.out.println(sc.nextLine());
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+	}	
+
 	private static void TestIO() {
 
 		aH = new AccountHandler();
 		bH = new BookHandler();
 
-		aH.getList();
-		bH.getList();
+		aH.getList(false);
+		bH.getList(false);
 
 		aH.CreateAccount();
 

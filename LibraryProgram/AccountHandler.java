@@ -21,12 +21,16 @@ public class AccountHandler {
 	}
 	
 	/* methods */
-	public void write() {
-		try { fm.WriteFile(accountList); }
+	public void write(boolean debug) {
+		try { fm.WriteFile(accountList, debug); }
 		catch(IOException e) { System.out.println(e); }
 	}
-	public void getList() {
-		try { accountList = fm.ReadFile(); }
+	public void getList(boolean print) {
+		try {
+			accountList = fm.ReadFile();
+			if(print) for(Account a : accountList)
+				System.out.println(a.getClass() + "	" + a.getId());
+		}
 		catch(IOException e) { System.out.println(e); }
 	}
 

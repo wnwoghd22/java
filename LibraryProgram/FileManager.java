@@ -63,14 +63,15 @@ public abstract class FileManager<T> {
 		}	
 		return list;	
 	}
-	public void WriteFile(List<T> contents) throws IOException {
+	public void WriteFile(List<T> contents, boolean debug) throws IOException {
 		String data = "";
 		for(T element : contents) data += getString(element) + "\n";
+		if(debug) System.out.print(data);
 
 		FileWriter fw = new FileWriter(path);
 		fw.write(data);
 		fw.flush();
 		fw.close();
-		System.out.println("Save");
+		if(debug) System.out.println("Save");
 	}
 }
