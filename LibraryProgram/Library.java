@@ -90,6 +90,7 @@ public class Library {
 			ShowBookList();
 			break;
 		case 4 : //return book
+			ReturnBook();
 			break;
 		case 0 : // exit loop
 			return false;
@@ -126,7 +127,21 @@ public class Library {
 		} while(true);
 	}
 	private static void ReturnBook() {
+		String[] list = aH.getBookList();
+		if(debug) for(String s : list) System.out.println(s);
+		if(list == null) return;
 
+		int choice = 0; 
+		while (true) {
+			do {
+				System.out.print("Return Book (1 ~ " + list.length + "), exit(0) > ");
+				choice = sc.nextInt();
+			} while (choice < 0 || choice > list.length);
+
+			if(choice == 0) break;
+
+			bH.ReturnBook(aH.ReturnBook(list[choice - 1]));	
+		}
 	}
 	private static void Help() {
 		try {

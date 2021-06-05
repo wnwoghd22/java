@@ -5,4 +5,5 @@ public interface Borrower {
 	public String ReturnBook(String b_id);
 	public void ShowInfo();
 	public void Extend(String b_id);
+	public String[] ShowBookList();
 }

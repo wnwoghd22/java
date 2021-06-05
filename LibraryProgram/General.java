@@ -35,7 +35,7 @@ public class General extends Book {
 	}
 	@Override
 	public void ReturnBook(){
-		if(currentNum-- > 0) currentNum--;
+		if(currentNum > 0) --currentNum;
 		else currentNum = 0;
 	}
 	public String getDescription() { return description; }

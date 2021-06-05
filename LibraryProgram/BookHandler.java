@@ -120,6 +120,10 @@ public class BookHandler {
 		Book result = getBook(id);
 		return result != null && result.Lend() ? result : null;
 	}
+	public void ReturnBook(String b_id) {
+		Book b = getBook(b_id);
+		if(b != null) b.ReturnBook();
+	}
 	public void ShowInfo() {
 		if(find != null) find.ShowInfo();
 	}

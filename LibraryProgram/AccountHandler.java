@@ -108,8 +108,12 @@ public class AccountHandler {
 	}
 	public boolean loggedIn() { return borrower != null; }
 	public void ShowInfo() { borrower.ShowInfo(); }
+	public String[] getBookList() { return borrower.ShowBookList(); }
 
 	public void Borrow(Book b) {
 		if(b != null) borrower.Borrow(b.getB_id(), b.getName());
+	}
+	public String ReturnBook(String b_id) {
+		return borrower.ReturnBook(b_id);
 	}
 }

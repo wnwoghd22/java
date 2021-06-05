@@ -53,6 +53,19 @@ public abstract class Account implements Borrower {
 			}
 		}
 	}
+	@Override 
+	public String[] ShowBookList() {
+		if(bookList.size() == 0) {
+			System.out.println("Don't have any books to return!");
+			return null;
+		}
+		String[] result = new String[bookList.size()];
+		for(int i = 0; i < result.length; ++i) {
+			bookList.get(i).printState();
+			result[i] = bookList.get(i).b_id;
+		}
+		return result;
+	}
 
 	public String getId() { return id; }
 	public String getPw() { return pw; }
