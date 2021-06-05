@@ -113,6 +113,7 @@ public class AccountHandler {
 		return true;
 	}
 	public boolean loggedIn() { return borrower != null || author != null ; }
+	public void logout() { borrower = null; author = null; }
 	public void ShowInfo() { borrower.ShowInfo(); }
 	public String[] getBookList() { return borrower.ShowBookList(); }
 

@@ -56,7 +56,9 @@ public class Library {
 			switch(input) {
 				case 1 : login(); break;
 				case 2 : aH.CreateAccount(); break;
-				case 0 : flag = true;
+				case 0 : 
+					aH.logout();
+					flag = true;
 			}
 			if(flag) break;
 			
