@@ -11,7 +11,7 @@ public class Library {
 
 	private static Scanner sc;
 
-	private static boolean debug;
+	private static boolean adminMode, debug;
 
 	public static void main(String args[]) {
 
@@ -19,8 +19,8 @@ public class Library {
 			Help(); return;
 		}
 
-		boolean printAlist = false, printBlist = false, adminMode = false;
-		debug = false;
+		boolean printAlist = false, printBlist = false;
+		adminMode = false; debug = false;
 
 		for(String s : args) {
 			if(s.equals("-al")) { printAlist = true; continue; }
@@ -49,8 +49,10 @@ public class Library {
 		int input = 0; boolean flag = false;
 
 		while(true) {
-			System.out.print("menu 1 : log in, 2 : create account, 0 : exit > ");
-			input = sc.nextInt();
+			do {
+				System.out.print("menu 1 : log in, 2 : create account, 0 : exit > ");
+				input = sc.nextInt();
+			} while (input < 0 || input > 2);
 			switch(input) {
 				case 1 : login(); break;
 				case 2 : aH.CreateAccount(); break;
@@ -62,6 +64,21 @@ public class Library {
 		}
 	}
 	private static void AdminLoop() {
+		int input = 0; boolean flag = false;
+
+		while(true) {
+			do {
+				System.out.print("menu 1 : log in, 0 : exit > ");
+				input = sc.nextInt();
+			} while (input < 0 || input > 1);
+			switch(input) {
+				case 1 : login(); break;
+				case 0 : flag = true;
+			}
+			if(flag) break;
+			
+			if(aH.loggedIn()) do; while (AuthorLoop());
+		}
 		return;
 	}
 
@@ -71,16 +88,16 @@ public class Library {
 		id = sc.next();
 		System.out.print("Password : ");
 		pw = sc.next();
-		aH.Login(id, pw);
+		aH.Login(id, pw, adminMode);
 	}
 	private static boolean UserLoop() {
 		boolean result = false;
-		System.out.print("choice ? : show info (1), book list (2), exit (0) >");
+		System.out.print("choice ? : show info (1), book list (2), return book (3), exit (0) >");
 
 		int choice = 0;
 		do {
 			choice = sc.nextInt();
-		} while(choice < 0 || choice > 7);
+		} while(choice < 0 || choice > 3);
 
 		switch(choice) {
 		case 1 : // show info
@@ -89,12 +106,14 @@ public class Library {
 		case 2 : //ShowList
 			ShowBookList();
 			break;
-		case 4 : //return book
+		case 3 : //return book
 			ReturnBook();
 			break;
 		case 0 : // exit loop
 			return false;
 		}
+		System.out.println("------------------------------------------------");
+
 		return true;
 	}
 	private static void ShowBookList() {
@@ -137,10 +156,14 @@ public class Library {
 				System.out.print("Return Book (1 ~ " + list.length + "), exit(0) > ");
 				choice = sc.nextInt();
 			} while (choice < 0 || choice > list.length);
-
+ 
 			if(choice == 0) break;
 
-			bH.ReturnBook(aH.ReturnBook(list[choice - 1]));	
+			bH.ReturnBook(aH.ReturnBook(list[choice - 1]));
+
+			if((list = aH.getBookList()) == null) break;
+
+			System.out.println("------------------------------------------------");
 		}
 	}
 	private static void Help() {
@@ -152,18 +175,29 @@ public class Library {
 		}
 	}	
 
-	private static void TestIO() {
+	private static boolean AuthorLoop() {
+		boolean result = false;
+		System.out.print("choice ? : add book(1), delete book(2), exit (0) > ");
 
-		aH = new AccountHandler();
-		bH = new BookHandler();
+		int choice = 0;
+		do {
+			choice = sc.nextInt();
+		} while(choice < 0 || choice > 2);
 
-		aH.getList(false);
-		bH.getList(false);
+		switch(choice) {
+		case 1 : // add book
+			bH.AddBook();
+			break;
+		case 2 : //delete book
+			bH.DeleteBook();
+			break;
+		case 3 : //return book
+			break;
+		case 0 : // exit loop
+			return false;
+		}
+		System.out.println("------------------------------------------------");
 
-		aH.CreateAccount();
-
-		bH.AddBook();
-
-		writeFile();
+		return true;
 	}
 }

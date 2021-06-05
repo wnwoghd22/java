@@ -79,6 +79,31 @@ public class BookHandler {
 
 		return bookList.get(bookList.size() - 1);
 	}
+	public Book DeleteBook() {
+		String b_id; Book target; boolean flag = true;
+		System.out.print("type book id which you want to delete : ");
+		b_id = sc.next();
+		if((target = getBook(b_id)) != null) {
+			target.ShowInfo();
+			while(flag) {
+				System.out.print("Are you sure to delete this book? (Y/N)");
+				char c = sc.next().charAt(0);
+				switch(c) {
+				case 'y' : case 'Y' :
+					if(bookList.remove(target)) {
+						System.out.println("delete complete!");
+						return target;
+					}
+					else return null;
+				case 'n' : case 'N' :
+					flag = false;
+				default :
+					break;
+				}
+			}
+		}
+		return null;
+	}
 	
 	public List<String> ShowList() {
 		List<String> result = new ArrayList<String>();

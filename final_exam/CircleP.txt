@@ -1,0 +1,10 @@
+(5, 5), (5, 5) is not a circle.
+
+This is Circle. The color is yellow.
+Drawing Circle here : (-6, 1), (-2, -1) : 14.05
+This is Circle. The color is yellow.
+Drawing Circle here : (7, 4), (8, 9) : 16.02
+This is Circle. The color is blue.
+Drawing Circle here : (9, -1), (10, -6) : 16.02
+This is Circle. The color is red.
+Drawing Circle here : (-1, -4), (8, 2) : 33.98

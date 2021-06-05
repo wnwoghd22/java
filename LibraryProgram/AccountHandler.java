@@ -12,9 +12,10 @@ public class AccountHandler {
 	private Borrower borrower;
 	private List<Account> accountList;
 	private AccountFileManager fm;
+	private Librarian author;
 
 	public AccountHandler() {
-		borrower = null;
+		borrower = null; author = null;
 		sc = new Scanner(System.in);
 		fm = new AccountFileManager("./Library/account_data.txt");
 		accountList = new ArrayList<Account>();
@@ -34,12 +35,17 @@ public class AccountHandler {
 		catch(IOException e) { System.out.println(e); }
 	}
 
-	public void Login(String id, String pw) {
+	public void Login(String id, String pw, boolean b) {
 		for(int i = 0; i < accountList.size(); ++i) {
 			if(accountList.get(i).getId().equals(id)) {
+				if(b && !(accountList.get(i) instanceof Librarian)) {
+					System.out.println("Not Authorized");
+					return;
+				}
 				if(checkIfValidPw(pw) && accountList.get(i).getPw().equals(pw)) {
 					System.out.println("Log in Complete!");
-					borrower = accountList.get(i);
+					if(b) author = (Librarian)accountList.get(i);
+					else borrower = accountList.get(i);
 				}
 				return;
 			}
@@ -106,7 +112,7 @@ public class AccountHandler {
 		}
 		return true;
 	}
-	public boolean loggedIn() { return borrower != null; }
+	public boolean loggedIn() { return borrower != null || author != null ; }
 	public void ShowInfo() { borrower.ShowInfo(); }
 	public String[] getBookList() { return borrower.ShowBookList(); }
 

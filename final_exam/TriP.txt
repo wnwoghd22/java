@@ -1,0 +1,13 @@
+(1, 0), (4, 0), (2, 0) is not a triangle.
+(-1, -1), (1, 1), (2, 2) is not a triangle.
+
+This is Triangle. The color is blue.
+Drawing Triangle here : (3, -2), (2, -8), (8, -6) : 18.81
+This is Triangle. The color is blue.
+Drawing Triangle here : (-6, -5), (-7, 4), (-4, -5) : 20.54
+This is Triangle. The color is blue.
+Drawing Triangle here : (-1, 1), (-6, 2), (-8, 8) : 21.32
+This is Triangle. The color is blue.
+Drawing Triangle here : (7, 1), (10, 9), (-7, 4) : 40.58
+This is Triangle. The color is yellow.
+Drawing Triangle here : (-3, -9), (-8, 9), (9, -4) : 53.08

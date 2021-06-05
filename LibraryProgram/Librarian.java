@@ -16,10 +16,10 @@ public class Librarian extends Account {
 	/* for csv file converting */
 	public Librarian(String[] args) {
 		/* args order : class, [bookList], class, e_id, id, pw */
-		super(args[2], args[3], 7, 5);
-		employeeId = args[1];
+		super(args[args.length - 2], args[args.length - 1], 7, 5);
+		employeeId = args[args.length - 3];
 		
-		if(args.length == 5) return;
+		if(args.length == 6) return;
 		String[] bListArgs = Arrays.copyOfRange(args, 1, args.length - 4);
 		for(int i = 0; i < bListArgs.length; i += 9) {
 			String[] sub = Arrays.copyOfRange(bListArgs, i, i + 9);
