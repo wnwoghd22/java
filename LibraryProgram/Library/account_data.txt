@@ -3,3 +3,5 @@ Library.Account.Normal,e001.1,ebN,2,2021,5,5,2021,5,8,genID1,genN,2,2021,5,5,202
 Library.Account.Student,,class Library.Account.Student,stu1,major1,stuPw123,s_id123
 Library.Account.Professor,,class Library.Account.Professor,asdf,pro123,pfopfo123
 Library.Account.Librarian,,class Library.Account.Librarian,libE123,lib1,lib123123
+Library.Account.Student,001,joN,2,2021,5,6,2021,5,20,class Library.Account.Student,user,Electric,user1234,20201234
+Library.Account.Normal,,class Library.Account.Normal,user2,asdf1234

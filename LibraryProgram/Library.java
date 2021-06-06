@@ -9,12 +9,19 @@ public class Library {
 	private static BookHandler bH;
 	private static void writeFile() { aH.write(debug); bH.write(debug); }
 
+	/* declared for avoid repetitve object constructing */
 	private static Scanner sc;
-
+	
+	/*
+	 * adminMode : if args has keyword "-admin", main stream changes into administrator mode.
+	 * in this mode, only librarian account can add or delete book.
+	 * debug : only for developers, if true, print some variables and file I/O results on console.
+	 */
 	private static boolean adminMode, debug;
 
 	public static void main(String args[]) {
 
+		/* if args contains only "help" */
 		if(args.length == 1 && args[0].equals("help")) {
 			Help(); return;
 		}
@@ -22,7 +29,7 @@ public class Library {
 		boolean printAlist = false, printBlist = false;
 		adminMode = false; debug = false;
 
-		for(String s : args) {
+		for(String s : args) { // args check
 			if(s.equals("-al")) { printAlist = true; continue; }
 			if(s.equals("-bl")) { printBlist = true; continue; }
 			if(s.equals("-admin")) { adminMode = true; continue; }
@@ -41,7 +48,7 @@ public class Library {
 		sc = new Scanner(System.in);
 
 		if(!adminMode) MainLoop();
-		else AdminLoop();
+		else AdminLoop(); // if got -admin argument, it goes into admin mode.
 		
 		writeFile();
 	}
@@ -49,10 +56,10 @@ public class Library {
 		int input = 0; boolean flag = false;
 
 		while(true) {
-			do {
+			do { //input range check, doesn't check if got NaN value
 				System.out.print("menu 1 : log in, 2 : create account, 0 : exit > ");
 				input = sc.nextInt();
-			} while (input < 0 || input > 2);
+			} while (input < 0 || input > 2); 
 			switch(input) {
 				case 1 : login(); break;
 				case 2 : aH.CreateAccount(); break;
@@ -62,14 +69,14 @@ public class Library {
 			}
 			if(flag) break;
 			
-			if(aH.loggedIn()) do; while (UserLoop());
+			if(aH.loggedIn()) do; while (UserLoop()); /* infinite loop while UserLoop returns false */
 		}
 	}
 	private static void AdminLoop() {
 		int input = 0; boolean flag = false;
 
 		while(true) {
-			do {
+			do { //input range check, doesn't check if got NaN value
 				System.out.print("menu 1 : log in, 0 : exit > ");
 				input = sc.nextInt();
 			} while (input < 0 || input > 1);
@@ -79,11 +86,15 @@ public class Library {
 			}
 			if(flag) break;
 			
-			if(aH.loggedIn()) do; while (AuthorLoop());
+			if(aH.loggedIn()) do; while (AuthorLoop()); /* infinite loop while AuthorLoop returns false */
 		}
 		return;
 	}
-
+	
+	/*
+	 * get values from standard IO, and then throw these to Login method of AccountHandler.
+	 * if admin mode is true, it checks if account is instanceof Librarian
+	 */
 	private static void login() {
 		String id, pw;
 		System.out.print("Log-in\nID : ");
@@ -92,6 +103,11 @@ public class Library {
 		pw = sc.next();
 		aH.Login(id, pw, adminMode);
 	}
+
+	/*
+	 * called in condition part of do while() loop
+	 * if user choose to exit, then it returns false and loop ends.
+	 */
 	private static boolean UserLoop() {
 		boolean result = false;
 		System.out.print("choice ? : show info (1), book list (2), return book (3), exit (0) >");
@@ -99,7 +115,7 @@ public class Library {
 		int choice = 0;
 		do {
 			choice = sc.nextInt();
-		} while(choice < 0 || choice > 3);
+		} while(choice < 0 || choice > 3); //doesn't check if it's NaN
 
 		switch(choice) {
 		case 1 : // show info
@@ -119,7 +135,7 @@ public class Library {
 		return true;
 	}
 	private static void ShowBookList() {
-		List<String> list = bH.ShowList(0);
+		List<String> list = bH.ShowList(0); //get bookList of user.
 		
 		int choice = 0;
 		do  {
@@ -127,11 +143,11 @@ public class Library {
 			"), Next 10 books (11), Previous 10 books (12), return to menu (0) >");
 			choice = sc.nextInt();
 
-			if(choice == 11) { list = bH.ShowList(false); continue; }
-			if(choice == 12) { list = bH.ShowList(true); continue; }
+			if(choice == 11) { list = bH.ShowList(false); continue; } //previous page
+			if(choice == 12) { list = bH.ShowList(true); continue; } //next page
 			if(choice == 0) break;
 			
-			if(choice >= 1 && choice <= list.size()) {
+			if(choice >= 1 && choice <= list.size()) { //choose one of books
 				String b_id = bH.getBook(list.get(choice - 1)).getB_id();
 				bH.ShowInfo();
 				do {
